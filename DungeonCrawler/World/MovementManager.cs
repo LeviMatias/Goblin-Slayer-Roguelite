@@ -12,7 +12,7 @@ namespace DungeonCrawler.World
     public class MovementManager
     {
 
-        public void Update(Map map, Player player, List<BaseEntity> entities)
+        public void Update(Map map, Player player, List<BaseNPC> entities)
         {
             Cell nextCell = map[(int)(player.x + player.Velocity.X), (int)(player.y + player.Velocity.Y)];
             if (map.Halls.Contains(nextCell))
@@ -21,8 +21,12 @@ namespace DungeonCrawler.World
                 player.SetPosition(new Point((int)(player.x + player.Velocity.X), (int)(player.y + player.Velocity.Y)));
                 nextCell.Occupant = player;
             }
-            foreach (BaseEntity entity in entities)
+            foreach (BaseNPC entity in entities)
+            {
+                map[entity.x, entity.y].Occupant = null;
                 PathfindingService.MoveEntity(map, player, entity);
+                map[entity.x, entity.y].Occupant = entity;
+            }
         }
     }
 }

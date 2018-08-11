@@ -14,14 +14,5 @@ namespace DungeonCrawler.Entities
 
         public bool HasTarget { get{ return Target != null; } }
 
-        public override void LoadContent(ContentManager content)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Update()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

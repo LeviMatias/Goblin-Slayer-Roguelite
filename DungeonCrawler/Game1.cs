@@ -23,7 +23,7 @@ namespace DungeonCrawler
         MovementManager _movementManager = new MovementManager();
         TurnManager _turnManager = TurnManager.Instance;
 
-        List<BaseEntity> entities = new List<BaseEntity>();
+        List<BaseNPC> entities = new List<BaseNPC>();
 
         public static int ScreenWidth = 800;
         public static int ScreenHeight = 600;
@@ -64,6 +64,13 @@ namespace DungeonCrawler
             CurrentMap = new DungeonGenerator().Generate();
             Tileset.SetTexture(Content, "RPGTileset(48)");
 
+            for(int i = 0; i< 10; i++)
+            {
+                entities.Add(new Goblin(1,1));
+                entities[i].SetPosition(CurrentMap.RandomPointInRandomRoom());
+                entities[i].LoadContent(Content);
+            }
+
             CurrentMap.LoadContent(Content);
             player.LoadContent(Content);
             player.SetPosition(CurrentMap.mainRoom.GetCenter());
@@ -91,7 +98,7 @@ namespace DungeonCrawler
 
             if (_turnManager.Update(player, entities))
             {
-                _movementManager.Update(CurrentMap, player);
+                _movementManager.Update(CurrentMap, player, entities);
             }
             _camera.Follow(player);
 
@@ -109,6 +116,7 @@ namespace DungeonCrawler
 
             CurrentMap.Draw(spriteBatch, new Vector2(player.x, player.y), player.VisionRadius);
             player.Draw(spriteBatch);
+            foreach (BaseNPC npc in entities) npc.Draw(spriteBatch);
 
             spriteBatch.End();
 

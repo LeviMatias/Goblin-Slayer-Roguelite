@@ -13,7 +13,6 @@ namespace DungeonCrawler.Entities
 {
     public class Goblin : BaseNPC
     {
-        private Cell target;
 
         public int CurrentHealth;
         public int MaxHealth;
@@ -29,12 +28,12 @@ namespace DungeonCrawler.Entities
         //sourcebox for the image
         public override void LoadContent(ContentManager content)
         {
-            sourceBox = new Rectangle(Tileset.Width * 3, 0, Tileset.Width, Tileset.Height);
+            sourceBox = new Rectangle(Tileset.Width * 3, Tileset.Height, Tileset.Width, Tileset.Height);
         }
 
         public override void Update()
         {
-            throw new NotImplementedException();
+          
         }
     }
 }

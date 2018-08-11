@@ -28,7 +28,7 @@ namespace DungeonCrawler
 
             //sorts based on condition
             return proposedLocations.Where(
-                l => !(map[l.X,l.Y].IsWall || map[l.X, l.Y].IsOccupied)).ToList();
+                l => (map.IsValidLocation(new Point(l.X, l.Y)) && !map[l.X,l.Y].IsWall && !map[l.X, l.Y].IsOccupied)).ToList();
         }
 
         private static Cell NextCell(Map map, Cell startCell, Cell targetCell)
@@ -90,8 +90,9 @@ namespace DungeonCrawler
                     }
                 }
             }
-            Location nextStep = closedSet[1];
-            if (nextStep == null) nextStep = closedSet[0];
+            Location nextStep;
+            if (closedSet.Count >= 2) nextStep = closedSet[1];
+            else nextStep = closedSet[0];
 
             return map[nextStep.X, nextStep.Y];
         }

@@ -29,7 +29,7 @@ namespace DungeonCrawler.World
 
         private TurnManager() { }
 
-        public bool Update(Player player, List<BaseEntity> entities)
+        public bool Update(Player player, List<BaseNPC> entities)
         {
             bool NewTurn = false;
             if ((turnStep % turnSpeed) == 0)

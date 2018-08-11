@@ -38,7 +38,7 @@ namespace DungeonCrawler.World.TerrainGeneration
             for (int i = 0; i < x; i++)
             {
                 for (int j = 0; j < y; j++) {
-                    cells[i, j] = new Cell();
+                    cells[i, j] = new Cell(i,j);
                 }
             }
 
@@ -106,18 +106,26 @@ namespace DungeonCrawler.World.TerrainGeneration
         private void LightFill(Vector2 sourcePoint, int x, int y, int radius)
         {
             Cell cell = cells[x, y];
-            if (cell.Visible || cell.IsWall || DistanceFrom(sourcePoint, new Vector2 (x, y)) >= radius) return;
+            int distance = DistanceFrom(sourcePoint, new Vector2(x, y));
+            if (cell.Visible || cell.IsWall || distance >= radius) return;
 
             cell.Visible = true;
+            if (distance + 3 >= radius) return;
             LightFill(sourcePoint, x + 1, y, radius);
             LightFill(sourcePoint, x - 1, y, radius);
             LightFill(sourcePoint, x, y + 1, radius);
             LightFill(sourcePoint, x, y - 1, radius);
         }
 
-        private int DistanceFrom(Vector2 v1, Vector2 v2)
+        public int DistanceFrom(Vector2 v1, Vector2 v2)
         {
             return (int)Math.Ceiling((v1 - v2).LengthSquared());
+        }
+
+        public Point RandomPointInRandomRoom()
+        {
+            Point pointInRoom = rooms[RandomGenerator.IntBetween(0, rooms.Count - 1)].RandomPointInsideRoom();
+            return pointInRoom;
         }
     }
 }

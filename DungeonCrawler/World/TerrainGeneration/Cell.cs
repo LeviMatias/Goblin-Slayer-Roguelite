@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DungeonCrawler.Components;
+using DungeonCrawler.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,12 +14,24 @@ namespace DungeonCrawler.World.TerrainGeneration
 {
     public class Cell
     {
-        public TerrainType Terrain = TerrainType.Empty;
         Texture2D texture;
         Rectangle hitbox;
         Rectangle sourceBox;
-        public bool IsWall { get { return (Terrain == TerrainType.Wall);} }
+
+        public TerrainType Terrain = TerrainType.Empty;
+        public BaseEntity Occupant;
+        public int x;
+        public int y;
+
+        public bool IsWall { private set { IsWall = value;} get { return (Terrain == TerrainType.Wall); } }
+        public bool IsOccupied { private set { IsOccupied = value;} get { return (Occupant != null); } }
         public bool Visible = false;
+
+        public Cell(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
 
         internal void LoadTexture(ContentManager content, int x, int y)
         {

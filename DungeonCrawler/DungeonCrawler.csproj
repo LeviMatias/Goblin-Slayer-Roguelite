@@ -73,8 +73,11 @@
     <Compile Include="Components\DrawComponent.cs" />
     <Compile Include="Components\Tileset.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\BaseNPC.cs" />
     <Compile Include="Entities\Goblin.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Pathfinding\Location.cs" />
+    <Compile Include="Pathfinding\PathfindingService.cs" />
     <Compile Include="RandomGenerator.cs" />
     <Compile Include="World\MovementManager.cs" />
     <Compile Include="World\TerrainGeneration\Cell.cs" />

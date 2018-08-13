@@ -119,7 +119,7 @@ namespace DungeonCrawler.World.TerrainGeneration
 
         public int DistanceFrom(Vector2 v1, Vector2 v2)
         {
-            return (int)Math.Ceiling((v1 - v2).Length());
+            return (int)Math.Floor((v1 - v2).Length());
         }
 
         public Point RandomPointInRandomRoom()

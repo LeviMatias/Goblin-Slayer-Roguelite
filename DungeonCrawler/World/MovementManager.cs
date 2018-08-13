@@ -21,6 +21,8 @@ namespace DungeonCrawler.World
                 player.SetPosition(new Point((int)(player.x + player.Velocity.X), (int)(player.y + player.Velocity.Y)));
                 nextCell.Occupant = player;
             }
+            else return;
+
             foreach (BaseNPC entity in entities)
             {
                 map[entity.x, entity.y].Occupant = null;

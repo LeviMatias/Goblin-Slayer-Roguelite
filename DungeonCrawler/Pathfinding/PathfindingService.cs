@@ -42,7 +42,7 @@ namespace DungeonCrawler
             openSet.Add(start);
             int gScore = 0; //total cost of traveling from startCell to target Cell
 
-            while(openSet.Count > 0)
+            while(openSet.Count > 0 && closedSet.Count < 2)
             {
                 var lowest = openSet.Min(location => location.F);
                 current = openSet.First(l => l.F == lowest);
@@ -54,6 +54,7 @@ namespace DungeonCrawler
                 if (closedSet.FirstOrDefault(cell => cell.x == target.X && cell.y == target.Y) != null)
                     //target was added to set
                     break;
+
                 var adjacentSquares = GetWalkableAdjacentSquares(current.X, current.Y, map);
                 gScore++;
 
@@ -104,23 +105,20 @@ namespace DungeonCrawler
 
             if (distance > entity.Aggro)
             {
-                if (!entity.HasTarget || !entity.HasPath)
-                {
-                    Cell start = map[entity.x, entity.y];
-                    entity.Target = map.RandomPointInRandomRoom();
-                    entity.AssignPath(GetPath(map, start, map[entity.Target]));
-                }
+                Cell start = map[entity.x, entity.y];
+                Point target = map.RandomPointInRandomRoom();
+                entity.AssignPath(GetPath(map, start, map[target]));
             }
             else
             {
                 if (distance <= 1) return;
                 Cell start = map[entity.x, entity.y];
                 Cell target = map[player.x, player.y];
-                entity.AssignPath(GetPath(map, start, map[entity.Target]));
-                if (entity.PathLength > 1)
-                    entity.GetNextCell();
+                entity.AssignPath(GetPath(map, start, target));
             }
 
+            if (entity.PathLength > 1)
+                entity.GetNextCell();
             newPosition = entity.GetNextCell();
             entity.SetPosition(new Point(newPosition.x, newPosition.y));
         }

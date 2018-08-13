@@ -16,7 +16,7 @@ namespace DungeonCrawler
     {
 
 
-        public int VisionRadius = 8;
+        public int VisionRadius = 6;
 
         public override void LoadContent(ContentManager content)
         {

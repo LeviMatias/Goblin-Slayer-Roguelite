@@ -20,8 +20,8 @@ namespace DungeonCrawler.World.TerrainGeneration
 
         public Point RandomPointInsideRoom()
         {
-            int y = RandomGenerator.IntBetween(UpperPoint.X,LowerPoint.X);
-            int x = RandomGenerator.IntBetween(UpperPoint.Y, LowerPoint.Y);
+            int y = RandomGenerator.IntBetween(UpperPoint.X  + 1,LowerPoint.X - 1);
+            int x = RandomGenerator.IntBetween(UpperPoint.Y + 1, LowerPoint.Y - 1);
 
             return new Point(x, y);
         }

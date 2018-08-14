@@ -75,11 +75,13 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\BaseNPC.cs" />
     <Compile Include="Entities\Goblin.cs" />
+    <Compile Include="Entities\OnDeathEventArgs.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Pathfinding\Location.cs" />
     <Compile Include="Pathfinding\PathfindingService.cs" />
     <Compile Include="RandomGenerator.cs" />
     <Compile Include="World\MovementManager.cs" />
+    <Compile Include="World\NPCManager.cs" />
     <Compile Include="World\TerrainGeneration\Cell.cs" />
     <Compile Include="World\TerrainGeneration\DirectionPicker.cs" />
     <Compile Include="World\TerrainGeneration\DungeonGenerator.cs" />

@@ -20,10 +20,10 @@ namespace DungeonCrawler
         Map CurrentMap;
         Player player = new Player();
         Camera _camera = new Camera();
+
         MovementManager _movementManager = new MovementManager();
         TurnManager _turnManager = TurnManager.Instance;
-
-        List<BaseNPC> entities = new List<BaseNPC>();
+        NPCManager _npcManager = NPCManager.Instance;
 
         public static int ScreenWidth = 800;
         public static int ScreenHeight = 600;
@@ -51,6 +51,13 @@ namespace DungeonCrawler
             graphics.PreferredBackBufferHeight = ScreenHeight;
             graphics.ApplyChanges();
             IsMouseVisible = true;
+
+            _npcManager.EnemyDied += HandleEnemyDeath;
+        }
+
+        private void HandleEnemyDeath(object sender, EventArgs e)
+        {
+            _npcManager.HandleEnemyDeath(CurrentMap, player, (BaseNPC)sender);
         }
 
         /// <summary>
@@ -64,12 +71,7 @@ namespace DungeonCrawler
             CurrentMap = new DungeonGenerator().Generate();
             Tileset.SetTexture(Content, "RPGTileset(48)");
 
-            for(int i = 0; i< 10; i++)
-            {
-                entities.Add(new Goblin(1,1));
-                entities[i].SetPosition(CurrentMap.RandomPointInRandomRoom());
-                entities[i].LoadContent(Content);
-            }
+            _npcManager.SpawnEnemies(Content, CurrentMap);
 
             CurrentMap.LoadContent(Content);
             player.LoadContent(Content);
@@ -96,9 +98,9 @@ namespace DungeonCrawler
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (_turnManager.Update(player, entities))
+            if (_turnManager.Update(player, _npcManager.Enemies))
             {
-                _movementManager.Update(CurrentMap, player, entities);
+                _movementManager.Update(CurrentMap, player, _npcManager.Enemies);
             }
             _camera.Follow(player);
 
@@ -116,7 +118,7 @@ namespace DungeonCrawler
 
             CurrentMap.Draw(spriteBatch, new Vector2(player.x, player.y), player.VisionRadius);
             player.Draw(spriteBatch);
-            foreach (BaseNPC npc in entities) npc.Draw(spriteBatch);
+            _npcManager.DrawEnemies(spriteBatch);
 
             spriteBatch.End();
 

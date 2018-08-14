@@ -14,13 +14,9 @@ namespace DungeonCrawler.Entities
     public class Goblin : BaseNPC
     {
 
-        public int CurrentHealth;
-        public int MaxHealth;
-        public int Damage;
-
         public Goblin(int Health, int Damage)
         {
-            this.Damage = Damage;
+            this.BaseDamage = Damage;
             MaxHealth = Health;
             CurrentHealth = MaxHealth;
         }

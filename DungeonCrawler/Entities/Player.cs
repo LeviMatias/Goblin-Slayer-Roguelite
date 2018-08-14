@@ -17,7 +17,6 @@ namespace DungeonCrawler
 
 
         public int VisionRadius = 6;
-        public int BaseDamage = 10;
 
         public override void LoadContent(ContentManager content)
         {

@@ -12,25 +12,72 @@ namespace DungeonCrawler.Entities
 {
     public abstract class BaseEntity : DrawComponent
     {
+        private int wriggleOffset = 0;
+        private int lungeOffset = 0;
+
         public int x;
         public int y;
         public Rectangle sourceBox;
         public Vector2 Velocity;
+        public bool Dead;
+
+        public int CurrentHealth;
+        public int MaxHealth;
+
+        public int BaseDamage = 10;
+        public int Damage { get { return BaseDamage; } }
 
         public abstract void LoadContent(ContentManager content);
 
         public abstract void Update();
 
+        public event EventHandler Died;
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle hitbox = new Rectangle((x - 1) * Tileset.Width, (y - 1) * Tileset.Height, Tileset.Width, Tileset.Height);
+            if (wriggleOffset > 0)
+            {
+                wriggleOffset--;
+            }
+
+            if (lungeOffset > 0)
+            {
+                lungeOffset--;
+            }
+
+            Rectangle hitbox = new Rectangle(
+                (x - 1) * Tileset.Width + 3*((int)Math.Pow(-1, wriggleOffset%6)), 
+                (y - 1) * Tileset.Height + 3 * ((int)Math.Pow(-1, lungeOffset % 6))
+                , Tileset.Width, Tileset.Height);
+
             spriteBatch.Draw(Tileset.Texture, hitbox, sourceBox, Color.White);
+        }
+
+        public void PlayWriggleAnimation()
+        {
+            wriggleOffset = 6;
+        }
+
+        public void PlayLungeAnimation()
+        {
+            lungeOffset = 6;
         }
 
         internal void SetPosition(Point point)
         {
             x = point.X;
             y = point.Y;
+        }
+
+        public void TakeDamage(int dmg)
+        {
+            CurrentHealth -= dmg;
+            if (CurrentHealth <= 0) OnDeath(EventArgs.Empty);
+        }
+
+        protected virtual void OnDeath(EventArgs e)
+        {
+            Died?.Invoke(this, e);
         }
 
     }

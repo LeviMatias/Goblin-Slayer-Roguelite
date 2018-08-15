@@ -21,14 +21,14 @@ namespace DungeonCrawler.Items
 
         public void DrawItem(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Tileset.Texture, hitbox, sourceBox, Color.White); ;
+            spriteBatch.Draw(Tileset.Texture, hitbox, sourceBox, Color.White);
         }
 
         public void Dropped(int x, int y)
         {
             this.x = x;
             this.y = y;
-            hitbox = new Rectangle(x, y, Tileset.Height, Tileset.Width);
+            hitbox = new Rectangle((x - 1)* Tileset.Width, (y - 1)* Tileset.Height, Tileset.Width, Tileset.Height);
         }
 
         public abstract void PickedUp(BaseEntity entity);

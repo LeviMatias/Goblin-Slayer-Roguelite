@@ -17,6 +17,7 @@ namespace DungeonCrawler.Items
         public Potion(int heal)
         {
             this.heal = heal;
+            sourceBox = new Rectangle(0, Tileset.Height*2, Tileset.Width, Tileset.Height);
         }
 
         public override void PickedUp(BaseEntity entity)

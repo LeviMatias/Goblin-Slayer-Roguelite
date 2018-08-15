@@ -45,8 +45,7 @@ namespace DungeonCrawler.World
 
             if (RandomGenerator.IntBetween(1,2) == 1)
             {
-                Console.WriteLine("Goblin has item");
-                int result = RandomGenerator.IntBetween(1, 3);
+                int result = RandomGenerator.IntBetween(1, 4);
                 // could use a factory class
                 switch (result)
                 {

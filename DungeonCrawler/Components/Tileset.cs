@@ -18,7 +18,7 @@ namespace DungeonCrawler.Components
         public static int Columns = 4;
         public static int Rows = 3;
 
-        public static Rectangle? FogSourceBox { get; internal set; }
+        public static Rectangle FogSourceBox { get; internal set; }
 
         public static void SetTexture(ContentManager content,string textureName)
         {

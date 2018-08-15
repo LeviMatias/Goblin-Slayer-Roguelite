@@ -45,7 +45,7 @@ namespace DungeonCrawler.World
 
             if (RandomGenerator.IntBetween(1,2) == 1)
             {
-                int result = RandomGenerator.IntBetween(1, 4);
+                int result = RandomGenerator.IntBetween(1, 3);
                 // could use a factory class
                 switch (result)
                 {

@@ -12,7 +12,7 @@ namespace DungeonCrawler
 
         public static int IntBetween(int minimumValue, int maxValue)
         {
-            return _generator.Next(minimumValue, maxValue);
+            return _generator.Next(minimumValue, maxValue + 1);
         }
     }
 }

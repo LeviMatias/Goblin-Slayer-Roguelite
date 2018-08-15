@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DungeonCrawler.Components;
 using DungeonCrawler.Entities;
+using DungeonCrawler.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,6 +20,7 @@ namespace DungeonCrawler.World.TerrainGeneration
         Rectangle sourceBox;
 
         public TerrainType Terrain = TerrainType.Empty;
+        public BaseItem Item = null;
         public BaseEntity Occupant;
         public int x;
         public int y;
@@ -53,9 +55,20 @@ namespace DungeonCrawler.World.TerrainGeneration
         internal void Draw(SpriteBatch spriteBatch)
         {
           spriteBatch.Draw(texture, hitbox, sourceBox, Color.White);
-          if (Visible || IsWall)
+            if (Visible || IsWall)
+            {
+                if (Item != null)
+                {
+                    Item.DrawItem(spriteBatch);
+                }
+
+                if (IsOccupied)
+                {
+                    Occupant.Draw(spriteBatch);
+                }
                 Visible = false;
-          else
+            }
+            else
                 spriteBatch.Draw(texture, hitbox, Tileset.FogSourceBox, Color.White);
 
         }

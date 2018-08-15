@@ -1,5 +1,6 @@
 ﻿using DungeonCrawler.Components;
 using DungeonCrawler.Entities;
+using DungeonCrawler.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,10 +16,9 @@ namespace DungeonCrawler
     public class Player : BaseEntity
     {
 
-
         public int VisionRadius = 6;
 
-        public override void LoadContent(ContentManager content)
+        public override void LoadContent()
         {
             sourceBox = new Rectangle(Tileset.Width * 3, 0, Tileset.Width, Tileset.Height);
         }

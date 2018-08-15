@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonCrawler.Items;
 using DungeonCrawler.World.TerrainGeneration;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -14,6 +15,7 @@ namespace DungeonCrawler.Entities
         //public Point Target;
         //public bool HasTarget { get{ return Target.X != 0 && Target.Y != 0 && x != Target.X && y!= Target.Y; } }
         public int Aggro = 4;
+        public BaseItem Loot;
         private List<Cell> path;
 
         public bool HasPath { get { return (path != null && path.Count() > 0); } }

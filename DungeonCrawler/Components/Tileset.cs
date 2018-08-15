@@ -16,7 +16,7 @@ namespace DungeonCrawler.Components
         public static int Width;
 
         public static int Columns = 4;
-        public static int Rows = 2;
+        public static int Rows = 3;
 
         public static Rectangle? FogSourceBox { get; internal set; }
 

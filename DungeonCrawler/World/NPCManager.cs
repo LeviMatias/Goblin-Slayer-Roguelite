@@ -1,4 +1,5 @@
 ﻿using DungeonCrawler.Entities;
+using DungeonCrawler.Items;
 using DungeonCrawler.World.TerrainGeneration;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -34,25 +35,51 @@ namespace DungeonCrawler.World
 
         private NPCManager() { }
 
+        private void CreateGoblin(Map CurrentMap)
+        {
+            BaseNPC goblin = new Goblin(1, 1);
+            Enemies.Add(goblin);
+            goblin.SetPosition(CurrentMap.RandomPointInRandomRoom());
+            goblin.LoadContent();
+            goblin.Died += RaiseEnemyDied;
+
+            if (RandomGenerator.IntBetween(1,2) == 1)
+            {
+                Console.WriteLine("Goblin has item");
+                int result = RandomGenerator.IntBetween(1, 3);
+                // could use a factory class
+                switch (result)
+                {
+                    case 1:
+                        goblin.Loot = new BaseWeapon(BaseWeapon.WeaponType.Sword);
+                        break;
+                    case 2:
+                        goblin.Loot = new BaseWeapon(BaseWeapon.WeaponType.Shiv);
+                        break;
+                    case 3:
+                        goblin.Loot = new Potion(RandomGenerator.IntBetween(2, 5));
+                        break;
+                }
+            }
+        }
+
         public void SpawnEnemies(ContentManager Content, Map CurrentMap)
         {
             for (int i = 0; i < 10; i++)
             {
-                Enemies.Add(new Goblin(1, 1));
-                Enemies[i].SetPosition(CurrentMap.RandomPointInRandomRoom());
-                Enemies[i].LoadContent(Content);
-                Enemies[i].Died += RaiseEnemyDied;
+                CreateGoblin(CurrentMap);
             }
-        }
-
-        public void DrawEnemies(SpriteBatch spriteBatch)
-        {
-            foreach (BaseNPC npc in Enemies) npc.Draw(spriteBatch);
         }
 
         public void HandleEnemyDeath(Map map, Player player, BaseNPC enemyThatDied)
         {
             map[enemyThatDied.x, enemyThatDied.y].Occupant = null;
+            if (enemyThatDied.Loot != null)
+            {
+                enemyThatDied.Loot.Dropped(enemyThatDied.x, enemyThatDied.y);
+                map[enemyThatDied.x, enemyThatDied.y].Item = enemyThatDied.Loot;
+            }
+            CreateGoblin(map);
         }
 
         private void RaiseEnemyDied(object sender, EventArgs e)

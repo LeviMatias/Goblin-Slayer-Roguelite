@@ -74,8 +74,9 @@ namespace DungeonCrawler
             _npcManager.SpawnEnemies(Content, CurrentMap);
 
             CurrentMap.LoadContent(Content);
-            player.LoadContent(Content);
+            player.LoadContent();
             player.SetPosition(CurrentMap.mainRoom.GetCenter());
+            CurrentMap[CurrentMap.mainRoom.GetCenter()].Occupant = player;
             // TODO: use this.Content to load your game content here
         }
 
@@ -117,8 +118,8 @@ namespace DungeonCrawler
             spriteBatch.Begin(transformMatrix: _camera.Transform);
 
             CurrentMap.Draw(spriteBatch, new Vector2(player.x, player.y), player.VisionRadius);
-            player.Draw(spriteBatch);
-            _npcManager.DrawEnemies(spriteBatch);
+            //player.Draw(spriteBatch);
+            //_npcManager.DrawEnemies(spriteBatch); each cell decides if it should draw its occupant
 
             spriteBatch.End();
 

@@ -1,4 +1,5 @@
 ﻿using DungeonCrawler.Components;
+using DungeonCrawler.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,14 +21,22 @@ namespace DungeonCrawler.Entities
         public Rectangle sourceBox;
         public Vector2 Velocity;
         public bool Dead;
+        public BaseWeapon Weapon;
 
         public int CurrentHealth;
         public int MaxHealth;
 
         public int BaseDamage = 10;
-        public int Damage { get { return BaseDamage; } }
+        public int Damage { get {
+                int damage = BaseDamage;
+                if (Weapon != null)
+                {
+                    damage += Weapon.DamageBonus;
+                }
+                return damage;
+            } }
 
-        public abstract void LoadContent(ContentManager content);
+        public abstract void LoadContent();
 
         public abstract void Update();
 

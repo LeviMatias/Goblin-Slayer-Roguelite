@@ -22,7 +22,7 @@ namespace DungeonCrawler.Entities
         }
 
         //sourcebox for the image
-        public override void LoadContent(ContentManager content)
+        public override void LoadContent()
         {
             sourceBox = new Rectangle(Tileset.Width * 3, Tileset.Height, Tileset.Width, Tileset.Height);
         }

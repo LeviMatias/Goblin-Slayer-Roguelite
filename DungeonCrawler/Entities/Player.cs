@@ -18,6 +18,12 @@ namespace DungeonCrawler
 
         public int VisionRadius = 6;
 
+        public Player()
+        {
+            this.MaxHealth = 100;
+            this.CurrentHealth = this.MaxHealth;
+        }
+
         public override void LoadContent()
         {
             sourceBox = new Rectangle(Tileset.Width * 3, 0, Tileset.Width, Tileset.Height);

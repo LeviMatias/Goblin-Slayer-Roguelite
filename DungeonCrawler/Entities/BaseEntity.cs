@@ -40,6 +40,7 @@ namespace DungeonCrawler.Entities
 
         public abstract void Update();
 
+        public event EventHandler HealthChanged;
         public event EventHandler Died;
 
         public void Draw(SpriteBatch spriteBatch)
@@ -82,6 +83,9 @@ namespace DungeonCrawler.Entities
         {
             CurrentHealth -= dmg;
             if (CurrentHealth <= 0) OnDeath(EventArgs.Empty);
+            else if (CurrentHealth > MaxHealth) CurrentHealth = MaxHealth;
+
+            HealthChanged?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnDeath(EventArgs e)

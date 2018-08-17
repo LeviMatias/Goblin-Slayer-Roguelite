@@ -22,7 +22,7 @@ namespace DungeonCrawler.Items
 
         public override void PickedUp(BaseEntity entity)
         {
-            entity.CurrentHealth += heal; 
+            entity.TakeDamage(-heal); 
         }
 
     }

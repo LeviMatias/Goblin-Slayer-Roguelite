@@ -83,6 +83,7 @@
     <Compile Include="Pathfinding\Location.cs" />
     <Compile Include="Pathfinding\PathfindingService.cs" />
     <Compile Include="RandomGenerator.cs" />
+    <Compile Include="UI\PlayerUI.cs" />
     <Compile Include="World\MovementManager.cs" />
     <Compile Include="World\NPCManager.cs" />
     <Compile Include="World\TerrainGeneration\Cell.cs" />

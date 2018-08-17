@@ -1,5 +1,6 @@
 ﻿using DungeonCrawler.Components;
 using DungeonCrawler.Entities;
+using DungeonCrawler.UI;
 using DungeonCrawler.World;
 using DungeonCrawler.World.TerrainGeneration;
 using Microsoft.Xna.Framework;
@@ -24,6 +25,7 @@ namespace DungeonCrawler
         MovementManager _movementManager = new MovementManager();
         TurnManager _turnManager = TurnManager.Instance;
         NPCManager _npcManager = NPCManager.Instance;
+        PlayerUI ui = new PlayerUI();
 
         public static int ScreenWidth = 800;
         public static int ScreenHeight = 600;
@@ -53,6 +55,7 @@ namespace DungeonCrawler
             IsMouseVisible = true;
 
             _npcManager.EnemyDied += HandleEnemyDeath;
+            ui.ConnectToEvents(player);
         }
 
         private void HandleEnemyDeath(object sender, EventArgs e)
@@ -121,6 +124,7 @@ namespace DungeonCrawler
             //player.Draw(spriteBatch);
             //_npcManager.DrawEnemies(spriteBatch); each cell decides if it should draw its occupant
 
+            ui.DrawBar(spriteBatch, Tileset.Width*player.x - ScreenWidth/2, Tileset.Height*player.y - ScreenHeight/2);
             spriteBatch.End();
 
             base.Draw(gameTime);

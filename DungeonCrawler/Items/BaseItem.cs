@@ -31,6 +31,6 @@ namespace DungeonCrawler.Items
             hitbox = new Rectangle((x - 1)* Tileset.Width, (y - 1)* Tileset.Height, Tileset.Width, Tileset.Height);
         }
 
-        public abstract void PickedUp(BaseEntity entity);
+        public abstract bool PickedUp(BaseEntity entity);
     }
 }

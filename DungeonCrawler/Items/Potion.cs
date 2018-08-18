@@ -20,9 +20,10 @@ namespace DungeonCrawler.Items
             sourceBox = new Rectangle(0, Tileset.Height*2, Tileset.Width, Tileset.Height);
         }
 
-        public override void PickedUp(BaseEntity entity)
+        public override bool PickedUp(BaseEntity entity)
         {
-            entity.TakeDamage(-heal); 
+            entity.TakeDamage(-heal);
+            return true;
         }
 
     }

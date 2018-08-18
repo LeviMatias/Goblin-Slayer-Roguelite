@@ -34,12 +34,14 @@ namespace DungeonCrawler.Items
             }
         }
 
-        public override void PickedUp(BaseEntity entity)
+        public override bool PickedUp(BaseEntity entity)
         {
             if(entity.Weapon == null || entity.Weapon.DamageBonus < this.DamageBonus)
             {
                 entity.Weapon = this;
+                return true;
             }
+            return false;
         }
     }
 }

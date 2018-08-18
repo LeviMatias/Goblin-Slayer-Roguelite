@@ -26,6 +26,16 @@ namespace DungeonCrawler.World
                 {
                     map[(player.x), (player.y)].Occupant = null;
                     player.SetPosition(new Point((int)(player.x + player.Velocity.X), (int)(player.y + player.Velocity.Y)));
+
+                    Cell currentCell = map[(player.x), (player.y)];
+                    if (currentCell.Item != null)
+                    {
+                        bool wasPicked = currentCell.Item.PickedUp(player);
+                        if (wasPicked)
+                        {
+                            currentCell.Item = null;
+                        }
+                    }
                     nextCell.Occupant = player;
                 }
             }
@@ -46,6 +56,16 @@ namespace DungeonCrawler.World
                     map[entity.x, entity.y].Occupant = null;
                     PathfindingService.MoveEntity(map, player, entity);
                     map[entity.x, entity.y].Occupant = entity;
+
+                    Cell currentCell = map[entity.x, entity.y];
+                    if (currentCell.Item != null)
+                    {
+                        bool wasPicked = currentCell.Item.PickedUp(entity);
+                        if (wasPicked)
+                        {
+                            currentCell.Item = null;
+                        }
+                    }
                 }
             }
         }

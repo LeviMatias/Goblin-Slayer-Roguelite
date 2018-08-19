@@ -15,13 +15,19 @@ namespace DungeonCrawler.Entities
     {
         private int wriggleOffset = 0;
         private int lungeOffset = 0;
+        private BaseWeapon _weapon;
 
         public int x;
         public int y;
         public Rectangle sourceBox;
         public Vector2 Velocity;
         public bool Dead;
-        public BaseWeapon Weapon;
+        public BaseWeapon Weapon {
+            set {
+                _weapon = value;
+                PickedWeapon?.Invoke(this, EventArgs.Empty);
+            }
+            get { return _weapon; } }
 
         public int CurrentHealth;
         public int MaxHealth;
@@ -41,6 +47,7 @@ namespace DungeonCrawler.Entities
         public abstract void Update();
 
         public event EventHandler HealthChanged;
+        public event EventHandler PickedWeapon;
         public event EventHandler Died;
 
         public void Draw(SpriteBatch spriteBatch)

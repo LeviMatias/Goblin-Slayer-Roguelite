@@ -124,7 +124,7 @@ namespace DungeonCrawler
             //player.Draw(spriteBatch);
             //_npcManager.DrawEnemies(spriteBatch); each cell decides if it should draw its occupant
 
-            ui.DrawBar(spriteBatch, Tileset.Width*player.x - ScreenWidth/2, Tileset.Height*player.y - ScreenHeight/2);
+            ui.Draw(spriteBatch, Tileset.Width*player.x - ScreenWidth/2, Tileset.Height*player.y - ScreenHeight/2);
             spriteBatch.End();
 
             base.Draw(gameTime);

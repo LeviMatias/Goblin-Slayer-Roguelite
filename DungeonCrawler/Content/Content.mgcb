@@ -13,30 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../../Pictures/My Pictures/My Assets/Pyxel Document/Terrain/RPGTileset(64).png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Pictures/My Pictures/My Assets/Pyxel Document/Terrain/RPGTileset(64).png
-
-#begin ../../../RPGTileset(64).png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../RPGTileset(64).png
-
 #begin RPGTileset(48).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -48,4 +24,14 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:RPGTileset(48).png
+
+#begin Fonts/PixelCaps.ttf
+/copy:Fonts/PixelCaps.ttf
+
+#begin Fonts/PixelCaps_12.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/PixelCaps_12.spritefont
 
